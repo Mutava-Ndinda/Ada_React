@@ -1,0 +1,19 @@
+.about-text{
+    color: rgb(241, 99, 10);
+    font-size: 24px;
+}
+#navlist{
+    list-style: none;
+    display: flex;
+    gap: 25%;
+    margin-left: 40%;
+    margin-top: 2%;
+}
+#button{
+    border-radius: 30px;
+    height: 30px;
+    width: 70px;
+    background-color: rgb(94, 190, 94);
+    border: none;
+    color: white;
+}
