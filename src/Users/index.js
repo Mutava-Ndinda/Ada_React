@@ -2,11 +2,13 @@ import { useGetUsers } from "./hooks/useGetUsers";
 import UserCard from "../Atoms/UserCard";
 import './index.css'
 
-const Users= () => {
+const Users= ({isLoggedIn}) => {
     const { users, error, loading} = useGetUsers();
     console.log({users});
 
     return(
+        <>
+        { isLoggedIn ?
         <div id="users">
             {loading && <h2>Loading users ...</h2>}
             {error.length> 0 && <h2>{error}</h2>}
@@ -20,7 +22,12 @@ const Users= () => {
                 email={user.email}
                 />
             )): !loading && <h2>No users found</h2>}
+        </div>:
+        <div>
+            <p id="p">Login first</p>
         </div>
+       }
+        </>
     );
 }
 export default Users;

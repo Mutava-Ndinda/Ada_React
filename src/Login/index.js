@@ -1,11 +1,13 @@
 import './index.css';
 import { useState } from 'react';
 import { login } from './utils';
+import { Introduction } from '../App';
 
-const Login =()=>{
+const Login =({setisLoggedIn})=>{
    
     const [username, setUserName] = useState('')
     const [password,setPassword]= useState('')
+    const [modalIsOpen, setModalIsOpen]=useState(false)
 
     console.log({username})
 
@@ -13,18 +15,26 @@ const Login =()=>{
         event.preventDefault();
         const result = await login({username, password});
         console.log({result})
+        if(result.token){
+            localStorage.setItem('token', result.token)
+            setisLoggedIn(true)
+            setModalIsOpen(false)
+        }
     };
 
     return(
         <div>
-            <form onSubmit={handleLogin}>
+           < Introduction setModalIsOpen={setModalIsOpen} />
+        
+           
+                {modalIsOpen &&   <form onSubmit={handleLogin}>,
                 <h2>Login</h2>
                 <input placeholder="Enter username" type="text" onChange={(event)=>setUserName(event.target.value)}/>
                 <br/>
                 <input placeholder="Enter password" type="password" onChange={(event)=>setPassword(event.target.value)}/>
                 <br/>
                 <button type="submit">Login</button>
-            </form>
+            </form>}
         </div>
     )
 }
